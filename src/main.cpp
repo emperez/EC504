@@ -14,7 +14,18 @@
 
 using namespace std;
 
-
+int linear_search(int num, int len, int * arr)
+{
+  int index, i;
+  for(i = 0; i < len; i++)
+  {
+    if(arr[i] == num) {
+      index = i;
+      break;
+    }
+  }
+  return index;
+}
 
 int main(){
 
@@ -45,6 +56,21 @@ int main(){
     }
 
   else cout << "Unable to open file";
+
+  // Naive Linear Search
+  int ind, rand_ind;
+  time_t t;
+  srand((unsigned) time(&t));
+  start = chrono::steady_clock::now();
+  for(int i = 0; i < 10000; i++)
+  {
+    rand_ind = rand()%10000; // Random index
+    ind = linear_search(data[rand_ind], 10000, data);
+  }
+  stop = chrono::steady_clock::now();
+  difference_in_time = stop - start;
+  deltatime = (double) difference_in_time.count();
+  cout << "Time spent searching for 10,000 random index in linear search: " << deltatime << endl;
 
   //test the xtrie
   MyXFast trie(10000);
